@@ -8,4 +8,8 @@ public class LinkedList {
 	public void add(Object obj) {
 		
 	}
+	
+	public void walk(WalkCallback callback) {
+		
+	}
 }
