@@ -31,5 +31,14 @@ public class TestLinkedList {
 		ll.walk(cb);
 		verify(cb, times(1)).processNode(hello);
 	}
-	
+
+	@Test
+	public void deleteNode() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		ll.deleteNode(hello);
+		ll.walk(cb);
+		verify(cb, never()).processNode(any());
+	}
 }

@@ -17,6 +17,10 @@ public class LinkedList {
 		}
 	}
 	
+	public void deleteNode(Object obj) {
+		
+	}
+	
 	public void walk(WalkCallback callback) {
 		LinkedListNode current = head;
 		while (current != null) {
