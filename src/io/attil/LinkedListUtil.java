@@ -30,6 +30,27 @@ public class LinkedListUtil {
 		ll.walk(finder);
 		return finder.isFound();
 	}
+
+	private static class CounterCallback implements WalkCallback {
+		private long cnt = 0;
+		
+		@Override
+		public void processNode(CallbackContext ctx) {
+			++cnt;
+		}
+		
+		public long count() {
+			return cnt;
+		}
+	}
+
+	
+	public static long count(LinkedList ll) {
+		CounterCallback counter = new CounterCallback();
+		ll.walk(counter);
+		return counter.count();
+
+	}
 	
 	public static void removeNodes(LinkedList ll, final Object obj) {
 		ll.walk(new WalkCallback() {

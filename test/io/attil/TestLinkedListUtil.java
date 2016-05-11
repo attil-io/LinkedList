@@ -1,5 +1,6 @@
 package io.attil;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
@@ -119,6 +120,29 @@ public class TestLinkedListUtil {
 		ll.add(hello);
 		ll.add(hello);
 		assertTrue(LinkedListUtil.contains(ll, "hello"));
+	}
+
+	@Test
+	public void testCountEmpty() {
+		LinkedList ll = new LinkedList();
+		assertEquals(0, LinkedListUtil.count(ll));
+	}
+
+	@Test
+	public void testCountOneElement() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		assertEquals(1, LinkedListUtil.count(ll));
+	}
+
+	@Test
+	public void testCountTwoElements() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		ll.add(hello);
+		assertEquals(2, LinkedListUtil.count(ll));
 	}
 
 }
