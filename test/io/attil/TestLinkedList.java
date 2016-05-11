@@ -37,7 +37,7 @@ public class TestLinkedList {
 		LinkedList ll = new LinkedList();
 		String hello = "hello";
 		ll.add(hello);
-		ll.deleteNode(hello);
+		ll.deleteNodes(hello);
 		ll.walk(cb);
 		verify(cb, never()).processNode(any());
 	}

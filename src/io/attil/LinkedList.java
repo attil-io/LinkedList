@@ -17,8 +17,23 @@ public class LinkedList {
 		}
 	}
 	
-	public void deleteNode(Object obj) {
-		
+	public void deleteNodes(Object obj) {
+		LinkedListNode current = head;
+		LinkedListNode prev = null;
+		while (current != null) {
+			if ((obj == null && current.data == null) || 
+					(obj != null && obj.equals(current.data))) {
+				if (null == prev) {
+					// we are on head node
+					head = current.next;
+				}
+				else {
+					prev.next = current.next;
+				}
+			}
+			prev = current;
+			current = current.next;
+		}		
 	}
 	
 	public void walk(WalkCallback callback) {
