@@ -55,4 +55,16 @@ public class TestLinkedListUtil {
 		verify(cb, times(1)).processNode(argThat(new CallbackContextMatcher(hello)));
 		verify(cb, never()).processNode(argThat(new CallbackContextMatcher(hello2)));
 	}
+
+
+	@Test
+	public void deleteNonExistingNode() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		String hello2 = "hello2";
+		LinkedListUtil.removeNodes(ll, hello2);
+		ll.walk(cb);
+		verify(cb, times(1)).processNode(argThat(new CallbackContextMatcher(hello)));
+	}
 }
