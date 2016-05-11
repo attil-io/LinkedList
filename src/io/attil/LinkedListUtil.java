@@ -16,4 +16,9 @@ public class LinkedListUtil {
 			}
 		});
 	}
+
+	public static void dropDuplicates(LinkedList ll) {
+
+	}
+
 }

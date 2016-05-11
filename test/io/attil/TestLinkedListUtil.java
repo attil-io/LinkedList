@@ -67,4 +67,26 @@ public class TestLinkedListUtil {
 		ll.walk(cb);
 		verify(cb, times(1)).processNode(argThat(new CallbackContextMatcher(hello)));
 	}
+	
+	@Test
+	public void dropDuplicatesEmptyList() {
+		LinkedList ll = new LinkedList();
+		LinkedListUtil.dropDuplicates(ll);
+		ll.walk(cb);
+		verify(cb, never()).processNode(any());
+	}
+
+
+	@Test
+	public void dropDuplicatesTwoDuplicates() {
+		LinkedList ll = new LinkedList();
+		LinkedListUtil.dropDuplicates(ll);
+		String hello = "hello";
+		ll.add(hello);
+		ll.add(hello);
+		LinkedListUtil.dropDuplicates(ll);
+		ll.walk(cb);
+		verify(cb, times(1)).processNode(argThat(new CallbackContextMatcher(hello)));
+	}
+	
 }
