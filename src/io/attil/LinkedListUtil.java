@@ -83,4 +83,37 @@ public class LinkedListUtil {
 		});
 	}
 
+	public static void dropDuplicatesAlternative(final LinkedList ll) {
+		ll.walk(new WalkCallback() {
+			private long nodeIdx = 0;
+			
+			@Override
+			public void processNode(CallbackContext ctx) {
+				final Object actValue = ctx.getNodeValue();
+				final long actNodeIdx = nodeIdx;
+				
+				ll.walk(new WalkCallback() {
+					private long nodeIdxInternal = 0;
+					
+					@Override
+					public void processNode(CallbackContext ctx) {
+						final Object actValueInternal = ctx.getNodeValue();
+						
+						if ((nodeIdxInternal > actNodeIdx) && 
+								((null == actValueInternal && null == actValue) || 
+								 (null != actValue && actValue.equals(actValueInternal)))) {
+							ctx.dropNode();
+						}
+						
+						++nodeIdxInternal;
+					}
+				});
+				
+				
+				++nodeIdx;
+			}
+		});
+		
+	}
+
 }

@@ -145,4 +145,25 @@ public class TestLinkedListUtil {
 		assertEquals(2, LinkedListUtil.count(ll));
 	}
 
+	@Test
+	public void dropDuplicatesAlternativeEmptyList() {
+		LinkedList ll = new LinkedList();
+		LinkedListUtil.dropDuplicatesAlternative(ll);
+		ll.walk(cb);
+		verify(cb, never()).processNode(any());
+	}
+
+
+	@Test
+	public void dropDuplicatesAlternativeTwoDuplicates() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		ll.add(hello);
+		LinkedListUtil.dropDuplicatesAlternative(ll);
+		ll.walk(cb);
+		verify(cb, times(1)).processNode(argThat(new CallbackContextMatcher(hello)));
+	}
+
+
 }
