@@ -1,5 +1,7 @@
 package io.attil;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.argThat;
 import static org.mockito.Mockito.never;
@@ -80,7 +82,6 @@ public class TestLinkedListUtil {
 	@Test
 	public void dropDuplicatesTwoDuplicates() {
 		LinkedList ll = new LinkedList();
-		LinkedListUtil.dropDuplicates(ll);
 		String hello = "hello";
 		ll.add(hello);
 		ll.add(hello);
@@ -89,4 +90,35 @@ public class TestLinkedListUtil {
 		verify(cb, times(1)).processNode(argThat(new CallbackContextMatcher(hello)));
 	}
 	
+	@Test
+	public void testContainsInEmptyList() {
+		LinkedList ll = new LinkedList();
+		assertFalse(LinkedListUtil.contains(ll, "hello"));
+	}
+
+	@Test
+	public void testContainsPositive() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		assertTrue(LinkedListUtil.contains(ll, "hello"));
+	}
+
+	@Test
+	public void testContainsNegative() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		assertFalse(LinkedListUtil.contains(ll, "hello2"));
+	}
+
+	@Test
+	public void testContainsTwice() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		ll.add(hello);
+		assertTrue(LinkedListUtil.contains(ll, "hello"));
+	}
+
 }
