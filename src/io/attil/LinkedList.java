@@ -23,16 +23,21 @@ public class LinkedList {
 		while (current != null) {
 			if ((obj == null && current.data == null) || 
 					(obj != null && obj.equals(current.data))) {
-				if (null == prev) {
-					// we are on head node
+				if (null == prev) {	// we are on head node
 					head = current.next;
+					current = head;
+					prev = null;
 				}
 				else {
 					prev.next = current.next;
+					current = current.next;
+					// prev is still the same
 				}
 			}
-			prev = current;
-			current = current.next;
+			else {
+				prev = current;
+				current = current.next;
+			}
 		}		
 	}
 	

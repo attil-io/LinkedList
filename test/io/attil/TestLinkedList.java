@@ -33,7 +33,7 @@ public class TestLinkedList {
 	}
 
 	@Test
-	public void deleteNode() {
+	public void deleteHeadNode() {
 		LinkedList ll = new LinkedList();
 		String hello = "hello";
 		ll.add(hello);
@@ -41,4 +41,33 @@ public class TestLinkedList {
 		ll.walk(cb);
 		verify(cb, never()).processNode(any());
 	}
+
+	@Test
+	public void deleteNonHeadNode() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		String hello2 = "hello2";
+		ll.add(hello2);
+		ll.deleteNodes(hello2);
+		ll.walk(cb);
+		verify(cb, times(1)).processNode(hello);
+		verify(cb, never()).processNode(hello2);
+	}
+
+	@Test
+	public void deleteMoreNodes() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		String hello2 = "hello2";
+		ll.add(hello2);
+		ll.add(hello2);		// twice
+		ll.deleteNodes(hello2);
+		ll.walk(cb);
+		verify(cb, times(1)).processNode(hello);
+		verify(cb, never()).processNode(hello2);
+	}
+
+
 }
