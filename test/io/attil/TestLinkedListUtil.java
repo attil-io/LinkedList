@@ -165,5 +165,18 @@ public class TestLinkedListUtil {
 		verify(cb, times(1)).processNode(argThat(new CallbackContextMatcher(hello)));
 	}
 
+	@Test
+	public void dropDuplicatesAlternativeTwoDuplicatesAndThird() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		String hello2 = "hello2";
+		ll.add(hello);
+		ll.add(hello2);
+		ll.add(hello);
+		LinkedListUtil.dropDuplicatesAlternative(ll);
+		ll.walk(cb);
+		verify(cb, times(1)).processNode(argThat(new CallbackContextMatcher(hello)));
+		verify(cb, times(1)).processNode(argThat(new CallbackContextMatcher(hello2)));
+	}	
 
 }
