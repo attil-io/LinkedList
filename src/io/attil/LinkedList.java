@@ -1,5 +1,6 @@
 package io.attil;
 
+import io.attil.impl.CallbackContext;
 import io.attil.impl.LinkedListNode;
 
 public class LinkedList {
@@ -41,11 +42,32 @@ public class LinkedList {
 		}		
 	}
 	
+	private void dropNode(LinkedListNode node) {
+		if (head == node) {
+			head = head.next;
+		}
+		else {
+			LinkedListNode n = head;
+			while (n.next != node) {
+				n = n.next;
+			}
+			n.next = node.next;
+		}
+	}
+	
 	public void walk(WalkCallback callback) {
 		LinkedListNode current = head;
 		while (current != null) {
-			callback.processNode(current.data);
-			current = current.next;
+			CallbackContext ctx = new CallbackContext(current);
+			callback.processNode(ctx);
+			if (current.dropped) {
+				LinkedListNode currentTemp = current.next;
+				dropNode(current);
+				current = currentTemp;
+			}
+			else {
+				current = current.next;
+			}				
 		}
 	}
 	
