@@ -137,7 +137,7 @@ public class LinkedListUtil {
 		public LinkedList rest() {
 			return restList;
 		}
-	}	
+	}
 	
 	public static LinkedList rest(final LinkedList ll, final long start) {
 		RestCallback rest = new RestCallback(start);
@@ -145,4 +145,32 @@ public class LinkedListUtil {
 		return rest.rest();
 	}
 
+	private static class DropAtCallback implements WalkCallback {
+		private long pos;
+		private long cnt;
+		private Object val;
+		
+		public DropAtCallback(long pos) {
+			this.pos = pos;
+		}
+		
+		@Override
+		public void processNode(CallbackContext ctx) {
+			if (cnt == pos) {
+				val = ctx.getNodeValue();
+				ctx.dropNode();
+			}
+			++cnt;
+		}
+		
+		public Object dropped() {
+			return val;
+		}
+	}	
+	
+	public static Object dropNodeAt(final LinkedList ll, final long pos) {
+		DropAtCallback drop = new DropAtCallback(pos);
+		ll.walk(drop);
+		return drop.dropped();
+	}
 }

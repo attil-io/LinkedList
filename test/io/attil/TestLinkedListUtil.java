@@ -2,9 +2,10 @@ package io.attil;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.argThat;
+import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -231,5 +232,55 @@ public class TestLinkedListUtil {
 		assertEquals(0, LinkedListUtil.count(rest));
 	}
 
+	@Test
+	public void testDropAtEmpty() {
+		LinkedList ll = new LinkedList();
+		Object result = LinkedListUtil.dropNodeAt(ll, 0);
+		assertNull(result);
+		assertEquals(0, LinkedListUtil.count(ll));
+	}
+	
+	@Test
+	public void testDropAtStart() {
+		LinkedList ll = new LinkedList();
+		ll.add("hello");
+		ll.add("hello2");
+		ll.add("hello3");
+		Object result = LinkedListUtil.dropNodeAt(ll, 0);
+		assertEquals("hello", result);
+		assertEquals(2, LinkedListUtil.count(ll));
+	}
 
+	@Test
+	public void testDropAtMiddle() {
+		LinkedList ll = new LinkedList();
+		ll.add("hello");
+		ll.add("hello2");
+		ll.add("hello3");
+		Object result = LinkedListUtil.dropNodeAt(ll, 1);
+		assertEquals("hello2", result);
+		assertEquals(2, LinkedListUtil.count(ll));
+	}
+
+	@Test
+	public void testDropAtLast() {
+		LinkedList ll = new LinkedList();
+		ll.add("hello");
+		ll.add("hello2");
+		ll.add("hello3");
+		Object result = LinkedListUtil.dropNodeAt(ll, 2);
+		assertEquals("hello3", result);
+		assertEquals(2, LinkedListUtil.count(ll));
+	}
+
+	@Test
+	public void testDropAtAfterLast() {
+		LinkedList ll = new LinkedList();
+		ll.add("hello");
+		ll.add("hello2");
+		ll.add("hello3");
+		Object result = LinkedListUtil.dropNodeAt(ll, 3);
+		assertNull(result);
+		assertEquals(3, LinkedListUtil.count(ll));
+	}
 }
