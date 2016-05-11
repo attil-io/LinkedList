@@ -179,4 +179,57 @@ public class TestLinkedListUtil {
 		verify(cb, times(1)).processNode(argThat(new CallbackContextMatcher(hello2)));
 	}	
 
+	
+	@Test
+	public void testRestEmpty() {
+		LinkedList ll = new LinkedList();
+		LinkedList rest = LinkedListUtil.rest(ll, 0);
+		assertEquals(0, LinkedListUtil.count(rest));
+	}
+	
+	@Test
+	public void testRestStart() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		ll.add(hello);
+		ll.add(hello);
+		LinkedList rest = LinkedListUtil.rest(ll, 0);
+		assertEquals(3, LinkedListUtil.count(rest));
+	}
+
+	@Test
+	public void testRestMiddle() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		ll.add(hello);
+		ll.add(hello);
+		LinkedList rest = LinkedListUtil.rest(ll, 1);
+		assertEquals(2, LinkedListUtil.count(rest));
+	}
+
+	@Test
+	public void testRestLast() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		ll.add(hello);
+		ll.add(hello);
+		LinkedList rest = LinkedListUtil.rest(ll, 2);
+		assertEquals(1, LinkedListUtil.count(rest));
+	}
+
+	@Test
+	public void testRestAfterLast() {
+		LinkedList ll = new LinkedList();
+		String hello = "hello";
+		ll.add(hello);
+		ll.add(hello);
+		ll.add(hello);
+		LinkedList rest = LinkedListUtil.rest(ll, 3);
+		assertEquals(0, LinkedListUtil.count(rest));
+	}
+
+
 }

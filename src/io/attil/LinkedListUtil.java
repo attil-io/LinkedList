@@ -116,4 +116,33 @@ public class LinkedListUtil {
 		
 	}
 
+	private static class RestCallback implements WalkCallback {
+		private long start;
+		private long cnt = 0;
+		private LinkedList restList = new LinkedList();
+		
+		public RestCallback(long start) {
+			this.start = start;
+		}
+		
+		@Override
+		public void processNode(CallbackContext ctx) {
+			if (cnt >= start) {
+				Object actValue = ctx.getNodeValue();
+				restList.add(actValue);
+			}
+			++cnt;
+		}
+		
+		public LinkedList rest() {
+			return restList;
+		}
+	}	
+	
+	public static LinkedList rest(final LinkedList ll, final long start) {
+		RestCallback rest = new RestCallback(start);
+		ll.walk(rest);
+		return rest.rest();
+	}
+
 }
