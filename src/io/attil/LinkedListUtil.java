@@ -173,4 +173,8 @@ public class LinkedListUtil {
 		ll.walk(drop);
 		return drop.dropped();
 	}
+	
+	public static LinkedList part(LinkedList ll, final Comparable middle) {
+		return null;
+	}
 }

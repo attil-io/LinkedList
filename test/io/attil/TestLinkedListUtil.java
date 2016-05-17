@@ -283,4 +283,20 @@ public class TestLinkedListUtil {
 		assertNull(result);
 		assertEquals(3, LinkedListUtil.count(ll));
 	}
+	
+	@Test
+	public void testPartEmpty() {
+		LinkedList ll = new LinkedList();
+		LinkedList result = LinkedListUtil.part(ll, 10);
+		assertEquals(0, LinkedListUtil.count(result));
+	}
+
+	@Test
+	public void testPartOneElement() {
+		LinkedList ll = new LinkedList();
+		ll.add(5);
+		LinkedList result = LinkedListUtil.part(ll, 10);
+		assertEquals(1, LinkedListUtil.count(result));
+	}
+
 }
