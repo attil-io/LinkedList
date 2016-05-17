@@ -299,4 +299,53 @@ public class TestLinkedListUtil {
 		assertEquals(1, LinkedListUtil.count(result));
 	}
 
+	@Test
+	public void testEqualsEmpty() {
+		LinkedList ll = new LinkedList();
+		Object [] compare = {};
+		assertTrue(LinkedListUtil.isEqual(ll, compare));
+	}
+
+	@Test
+	public void testEqualsOneElement() {
+		LinkedList ll = new LinkedList();
+		ll.add(5);
+		Object [] compare = {5};
+		assertTrue(LinkedListUtil.isEqual(ll, compare));
+	}
+
+	@Test
+	public void testEqualsDifferent() {
+		LinkedList ll = new LinkedList();
+		ll.add(5);
+		Object [] compare = {6};
+		assertFalse(LinkedListUtil.isEqual(ll, compare));
+	}
+
+	@Test
+	public void testEqualsTwoElement() {
+		LinkedList ll = new LinkedList();
+		ll.add(5);
+		ll.add(6);
+		Object [] compare = {5, 6};
+		assertTrue(LinkedListUtil.isEqual(ll, compare));
+	}
+	
+	@Test
+	public void testEqualsArrLonger() {
+		LinkedList ll = new LinkedList();
+		ll.add(5);
+		Object [] compare = {5, 6};
+		assertFalse(LinkedListUtil.isEqual(ll, compare));
+	}
+
+	@Test
+	public void testEqualsListLonger() {
+		LinkedList ll = new LinkedList();
+		ll.add(5);
+		ll.add(6);
+		Object [] compare = {5};
+		assertFalse(LinkedListUtil.isEqual(ll, compare));
+	}
+
 }

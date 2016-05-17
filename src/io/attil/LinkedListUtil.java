@@ -177,4 +177,8 @@ public class LinkedListUtil {
 	public static LinkedList part(LinkedList ll, final Comparable middle) {
 		return null;
 	}
+	
+	public static boolean isEqual(LinkedList ll, final Object[] arr) {
+		return false;
+	}
 }
