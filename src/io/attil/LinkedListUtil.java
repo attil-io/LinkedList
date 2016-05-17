@@ -178,7 +178,39 @@ public class LinkedListUtil {
 		return null;
 	}
 	
+	private static class EqualityCallBack implements WalkCallback {
+		private long cnt = 0;
+		private Object[] arr;
+		private boolean areEqual = true;
+		
+		public EqualityCallBack(Object [] arr) {
+			this.arr = arr;
+		}
+		
+		@Override
+		public void processNode(CallbackContext ctx) {
+			Object val = ctx.getNodeValue();
+			if (cnt >= arr.length) {
+				areEqual = false; 
+			}
+			else {
+				Object arrVal = arr[(int)cnt];
+				if (((val == null) && (arrVal != null)) ||
+						(!val.equals(arrVal))) {
+					areEqual = false;
+				}
+			}
+			++cnt;
+		}
+		
+		public boolean equal() {
+			return (areEqual && (arr.length == cnt));
+		}
+	}
+	
 	public static boolean isEqual(LinkedList ll, final Object[] arr) {
-		return false;
+		EqualityCallBack eq = new EqualityCallBack(arr);
+		ll.walk(eq);
+		return eq.equal();
 	}
 }
