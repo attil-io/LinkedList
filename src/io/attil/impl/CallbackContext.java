@@ -2,6 +2,7 @@ package io.attil.impl;
 
 public class CallbackContext {
 	private LinkedListNode node;
+	private boolean stopped = false;
 	
 	public CallbackContext(LinkedListNode node) {
 		this.node = node;
@@ -15,4 +16,11 @@ public class CallbackContext {
 		node.dropped = true;
 	}
 	
+	public void stopWalk() {
+		stopped = true;
+	}
+	
+	public boolean isStopped() {
+		return stopped;
+	}
 }

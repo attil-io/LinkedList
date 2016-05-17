@@ -43,7 +43,10 @@ public class LinkedList {
 			}
 			else {
 				current = current.next;
-			}				
+			}
+			if (ctx.isStopped()) {
+				current = null;		// force iteration to stop
+			}
 		}
 	}
 	

@@ -191,13 +191,15 @@ public class LinkedListUtil {
 		public void processNode(CallbackContext ctx) {
 			Object val = ctx.getNodeValue();
 			if (cnt >= arr.length) {
-				areEqual = false; 
+				areEqual = false;
+				ctx.stopWalk();
 			}
 			else {
 				Object arrVal = arr[(int)cnt];
 				if (((val == null) && (arrVal != null)) ||
 						(!val.equals(arrVal))) {
 					areEqual = false;
+					ctx.stopWalk();
 				}
 			}
 			++cnt;
