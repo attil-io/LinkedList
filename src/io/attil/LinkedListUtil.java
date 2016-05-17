@@ -173,9 +173,47 @@ public class LinkedListUtil {
 		ll.walk(drop);
 		return drop.dropped();
 	}
+
+	private static class PartCallback implements WalkCallback {
+		private LinkedList smaller;
+		private LinkedList bigger;
+		private Comparable middle;
+		
+		public PartCallback(final Comparable middle) {
+			smaller = new LinkedList();
+			bigger = new LinkedList();
+			this.middle = middle;
+		}
+		
+		@Override
+		public void processNode(CallbackContext ctx) {
+			Object val = ctx.getNodeValue();
+			final int comparisonResult = middle.compareTo(val);
+			if (comparisonResult <= 0) {
+				smaller.add(val);
+			}
+			else {
+				bigger.add(val);
+			}
+		}
+		
+		public LinkedList getSortedList() {
+			// TODO: more optimal merge
+			bigger.walk(new WalkCallback() {
+				
+				@Override
+				public void processNode(CallbackContext ctx) {
+					smaller.add(ctx.getNodeValue());
+				}
+			});
+			return smaller;
+		}
+	}
 	
 	public static LinkedList part(LinkedList ll, final Comparable middle) {
-		return null;
+		PartCallback partCallback = new PartCallback(middle);
+		ll.walk(partCallback);
+		return partCallback.getSortedList();
 	}
 	
 	private static class EqualityCallBack implements WalkCallback {
