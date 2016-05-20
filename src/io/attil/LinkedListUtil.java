@@ -253,4 +253,8 @@ public class LinkedListUtil {
 		ll.walk(eq);
 		return eq.equal();
 	}
+
+	public static Object nthMax(LinkedList ll, int i) {
+		return null;
+	}
 }

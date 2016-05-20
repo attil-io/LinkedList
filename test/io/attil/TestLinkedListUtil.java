@@ -364,5 +364,12 @@ public class TestLinkedListUtil {
 		Object [] compare = {5};
 		assertFalse(LinkedListUtil.isEqual(ll, compare));
 	}
+	
+	@Test
+	public void testNthMaxEmpty() {
+		LinkedList ll = new LinkedList();
+		Object res = LinkedListUtil.nthMax(ll, 1);
+		assertNull(res);
+	}
 
 }
