@@ -254,7 +254,29 @@ public class LinkedListUtil {
 		return eq.equal();
 	}
 
+	private static class NthMaxCallback implements WalkCallback {
+		private Comparable actualMax = null;
+		
+		@Override
+		public void processNode(CallbackContext ctx) {
+			Comparable nodeValue = (Comparable) ctx.getNodeValue();
+			if (null == actualMax) {
+				actualMax = nodeValue;
+			}
+			else if (actualMax.compareTo(nodeValue) < 0) {
+				actualMax = nodeValue;
+			}
+		}
+		
+		public Comparable getActualMax() {
+			return actualMax;
+		}
+		
+	}
+	
 	public static Object nthMax(LinkedList ll, int i) {
-		return null;
+		NthMaxCallback nthMaxCallback = new NthMaxCallback();
+		ll.walk(nthMaxCallback);
+		return nthMaxCallback.getActualMax();
 	}
 }

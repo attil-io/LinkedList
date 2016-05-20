@@ -372,4 +372,14 @@ public class TestLinkedListUtil {
 		assertNull(res);
 	}
 
+	
+	@Test
+	public void testFirstMax() {
+		LinkedList ll = new LinkedList();
+		ll.add(1);
+		ll.add(3);
+		ll.add(2);
+		Object res = LinkedListUtil.nthMax(ll, 1);
+		assertEquals(3, res);
+	}
 }
