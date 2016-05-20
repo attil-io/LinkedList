@@ -288,7 +288,8 @@ public class TestLinkedListUtil {
 	public void testPartEmpty() {
 		LinkedList ll = new LinkedList();
 		LinkedList result = LinkedListUtil.part(ll, 10);
-		assertEquals(0, LinkedListUtil.count(result));
+		Object []  expected = {};
+		assertTrue(LinkedListUtil.isEqual(result,  expected));
 	}
 
 	@Test
@@ -296,9 +297,25 @@ public class TestLinkedListUtil {
 		LinkedList ll = new LinkedList();
 		ll.add(5);
 		LinkedList result = LinkedListUtil.part(ll, 10);
-		assertEquals(1, LinkedListUtil.count(result));
+		Object []  expected = {5};
+		assertTrue(LinkedListUtil.isEqual(result,  expected));
 	}
 
+	@Test
+	public void testPartMoreElements() {
+		LinkedList ll = new LinkedList();
+		ll.add(5);
+		ll.add(1);
+		ll.add(1);
+		ll.add(9);
+		ll.add(11);
+		ll.add(2);
+		ll.add(3);
+		LinkedList result = LinkedListUtil.part(ll, 3);
+		Object []  expected = {1, 1, 2, 3, 5, 9, 11};
+		assertTrue(LinkedListUtil.isEqual(result,  expected));
+	}	
+	
 	@Test
 	public void testEqualsEmpty() {
 		LinkedList ll = new LinkedList();

@@ -189,7 +189,7 @@ public class LinkedListUtil {
 		public void processNode(CallbackContext ctx) {
 			Object val = ctx.getNodeValue();
 			final int comparisonResult = middle.compareTo(val);
-			if (comparisonResult <= 0) {
+			if (comparisonResult >= 0) {
 				smaller.add(val);
 			}
 			else {
