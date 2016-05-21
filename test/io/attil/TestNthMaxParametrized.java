@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,28 +12,34 @@ import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
 public class TestNthMaxParametrized {
-
     @Parameterized.Parameters
     public static Collection testData() {
        return Arrays.asList(new Object[][] {
-          { 1, 2 },
-          { 3, 4 },
-          { 5, 6 },
-          { 7, 8 },
-          { 9, 10 }
+          { Arrays.asList(),  1, null},
+          { Arrays.asList(5),  1, 5},
+          { Arrays.asList(3, 5, 9, 1),  1, 9},
+          { Arrays.asList(3, 5, 9, 1),  2, 5},
+          { Arrays.asList(3, 5, 9, 1),  3, 3},
+          { Arrays.asList(3, 5, 9, 1),  4, 1},
+          { Arrays.asList(3, 5, 9, 1),  5, null},
        });
     }
 
-    private int numberOne;
-    private int numberTwo;
+    private LinkedList ll;
+    private int nthMax;
+    private Integer expected;
     
-    public TestNthMaxParametrized(Integer numberOne, Integer numberTwo) {
-    	this.numberOne = numberOne;
-    	this.numberTwo = numberTwo;
-    }    
+    public TestNthMaxParametrized(List<Integer> list, Integer nthMax, Integer expected) {
+    	ll = new LinkedList();
+    	for (Integer i : list) {
+    		ll.add(i);
+    	}
+    	this.nthMax = nthMax;
+   		this.expected = expected;
+    }
     
     @Test
     public void testNthMax() {
-    	assertEquals(numberTwo, numberOne + 1);
+    	assertEquals(expected, LinkedListUtil.nthMax(ll, nthMax));
     }
 }

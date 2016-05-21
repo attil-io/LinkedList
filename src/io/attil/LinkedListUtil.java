@@ -273,6 +273,7 @@ public class LinkedListUtil {
 			for (int i = 0; i < actMaxes.length; ++i) {
 				if (null == actMaxes[i]) {
 					actMaxes[i] = nodeValue;
+					break;
 				}
 				else if (actMaxes[i].compareTo(nodeValue) < 0) {
 					shiftMaxes(i);
