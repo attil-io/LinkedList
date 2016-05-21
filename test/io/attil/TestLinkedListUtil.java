@@ -414,4 +414,11 @@ public class TestLinkedListUtil {
 		assertTrue(LinkedListUtil.isPalindrome(ll));
 	}
 
+	@Test
+	public void testPalindromeFalseTwoElements() {
+		LinkedList ll = new LinkedList();
+		ll.add(1);
+		ll.add(2);
+		assertFalse(LinkedListUtil.isPalindrome(ll));
+	}
 }

@@ -288,14 +288,55 @@ public class LinkedListUtil {
 		}
 		
 	}
-	
+
 	public static Object nthMax(LinkedList ll, int nth) {
 		NthMaxCallback nthMaxCallback = new NthMaxCallback(nth);
 		ll.walk(nthMaxCallback);
 		return nthMaxCallback.getNthMax();
 	}
 	
+	private static class PalindromeCallback implements WalkCallback {
+		private Object[] firstPart = null;
+		private int cnt;
+		private boolean isOdd = false;
+		private boolean palindrome = true;
+		
+		public PalindromeCallback(int length) {
+			firstPart = new Object[length / 2];
+			cnt = 0;
+			isOdd = ((length % 2) == 1);
+		}
+		
+		
+		@Override
+		public void processNode(CallbackContext ctx) {
+			if (!palindrome) {
+				return;
+			}
+			Object nodeValue = ctx.getNodeValue();
+			if (cnt < firstPart.length) {
+				firstPart[cnt] = nodeValue;
+			}
+			else if ((isOdd) && (cnt == firstPart.length + 1)) {
+				// do nothing
+			}
+			else {
+				int idx = 2 * firstPart.length - cnt;
+				Object otherValue = firstPart[idx];
+				boolean equal = (null == otherValue && null == firstPart[idx]) ||
+								(null != otherValue && otherValue.equals(firstPart[idx]));
+				palindrome = palindrome && equal;
+			}
+		}
+		
+		public boolean isPalindrome() {
+			return palindrome;
+		}
+	}
+	
 	public static boolean isPalindrome(LinkedList ll) {
-		return false;
+		PalindromeCallback palindromeMaxCallback = new PalindromeCallback((int)count(ll));
+		ll.walk(palindromeMaxCallback);
+		return palindromeMaxCallback.isPalindrome();
 	}
 } 
