@@ -255,28 +255,42 @@ public class LinkedListUtil {
 	}
 
 	private static class NthMaxCallback implements WalkCallback {
-		private Comparable actualMax = null;
+		private Comparable[] actMaxes = null;
+		
+		public NthMaxCallback(int n) {
+			actMaxes = new Comparable[n];
+		}
+		
+		private void shiftMaxes(int start) {
+			for (int i = actMaxes.length - 1; i > start; --i) {
+				actMaxes[i] = actMaxes[i - 1];
+			}
+		}
 		
 		@Override
 		public void processNode(CallbackContext ctx) {
 			Comparable nodeValue = (Comparable) ctx.getNodeValue();
-			if (null == actualMax) {
-				actualMax = nodeValue;
-			}
-			else if (actualMax.compareTo(nodeValue) < 0) {
-				actualMax = nodeValue;
+			for (int i = 0; i < actMaxes.length; ++i) {
+				if (null == actMaxes[i]) {
+					actMaxes[i] = nodeValue;
+				}
+				else if (actMaxes[i].compareTo(nodeValue) < 0) {
+					shiftMaxes(i);
+					actMaxes[i] = nodeValue;
+					break;
+				}
 			}
 		}
 		
-		public Comparable getActualMax() {
-			return actualMax;
+		public Comparable getNthMax() {
+			return actMaxes[actMaxes.length - 1];
 		}
 		
 	}
 	
-	public static Object nthMax(LinkedList ll, int i) {
-		NthMaxCallback nthMaxCallback = new NthMaxCallback();
+	public static Object nthMax(LinkedList ll, int nth) {
+		NthMaxCallback nthMaxCallback = new NthMaxCallback(nth);
 		ll.walk(nthMaxCallback);
-		return nthMaxCallback.getActualMax();
+		return nthMaxCallback.getNthMax();
 	}
-}
+} 
