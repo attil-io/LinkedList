@@ -294,4 +294,8 @@ public class LinkedListUtil {
 		ll.walk(nthMaxCallback);
 		return nthMaxCallback.getNthMax();
 	}
+	
+	public static boolean isPalindrome(LinkedList ll) {
+		return false;
+	}
 } 

@@ -393,4 +393,25 @@ public class TestLinkedListUtil {
 		assertEquals(2, res);
 	}
 
+	@Test
+	public void testPalindromeEmpty() {
+		LinkedList ll = new LinkedList();
+		assertTrue(LinkedListUtil.isPalindrome(ll));
+	}
+
+	@Test
+	public void testPalindromeOneElement() {
+		LinkedList ll = new LinkedList();
+		ll.add(1);
+		assertTrue(LinkedListUtil.isPalindrome(ll));
+	}
+
+	@Test
+	public void testPalindromeTrueTwoElements() {
+		LinkedList ll = new LinkedList();
+		ll.add(1);
+		ll.add(1);
+		assertTrue(LinkedListUtil.isPalindrome(ll));
+	}
+
 }
