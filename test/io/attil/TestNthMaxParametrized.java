@@ -22,6 +22,8 @@ public class TestNthMaxParametrized {
           { Arrays.asList(3, 5, 9, 1),  3, 3},
           { Arrays.asList(3, 5, 9, 1),  4, 1},
           { Arrays.asList(3, 5, 9, 1),  5, null},
+          { Arrays.asList(1, 1),  1, 1},
+          { Arrays.asList(1, 1),  2, 1},
        });
     }
 
