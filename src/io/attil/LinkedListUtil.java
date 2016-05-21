@@ -300,11 +300,13 @@ public class LinkedListUtil {
 		private int cnt;
 		private boolean isOdd = false;
 		private boolean palindrome = true;
+		private int totalLength = 0;
 		
 		public PalindromeCallback(int length) {
 			firstPart = new Object[length / 2];
 			cnt = 0;
 			isOdd = ((length % 2) == 1);
+			totalLength = length;
 		}
 		
 		
@@ -317,16 +319,17 @@ public class LinkedListUtil {
 			if (cnt < firstPart.length) {
 				firstPart[cnt] = nodeValue;
 			}
-			else if ((isOdd) && (cnt == firstPart.length + 1)) {
+			else if ((isOdd) && (cnt == firstPart.length)) {
 				// do nothing
 			}
 			else {
-				int idx = 2 * firstPart.length - cnt;
+				int idx = totalLength - cnt - 1;
 				Object otherValue = firstPart[idx];
-				boolean equal = (null == otherValue && null == firstPart[idx]) ||
-								(null != otherValue && otherValue.equals(firstPart[idx]));
+				boolean equal = (null == otherValue && null == nodeValue) ||
+								(null != nodeValue && nodeValue.equals(otherValue));
 				palindrome = palindrome && equal;
 			}
+			++cnt;
 		}
 		
 		public boolean isPalindrome() {

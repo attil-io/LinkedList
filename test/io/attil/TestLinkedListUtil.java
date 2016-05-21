@@ -421,4 +421,22 @@ public class TestLinkedListUtil {
 		ll.add(2);
 		assertFalse(LinkedListUtil.isPalindrome(ll));
 	}
+	
+	@Test
+	public void testPalindromeTrueThreeElements() {
+		LinkedList ll = new LinkedList();
+		ll.add(1);
+		ll.add(2);
+		ll.add(1);
+		assertTrue(LinkedListUtil.isPalindrome(ll));
+	}
+
+	@Test
+	public void testPalindromeFalseThreeElements() {
+		LinkedList ll = new LinkedList();
+		ll.add(1);
+		ll.add(2);
+		ll.add(2);
+		assertFalse(LinkedListUtil.isPalindrome(ll));
+	}
 }
